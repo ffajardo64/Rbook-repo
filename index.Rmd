@@ -1,18 +1,41 @@
 --- 
-title: "A Minimal Book Example"
-author: "Yihui Xie"
+title: "Introdução à Ciência de Dados com R"
+author: "Fabio Fajardo Molinares"
 date: "`r Sys.Date()`"
-site: bookdown::bookdown_site
-output: bookdown::gitbook
-documentclass: book
-bibliography: [book.bib, packages.bib]
+lang: pt-br
+documentclass: style/krantz
+bibliography: [bib/bib.bib]
 biblio-style: apalike
 link-citations: yes
-github-repo: rstudio/bookdown-demo
-description: "This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook."
+colorlinks: no
+lot: yes
+lof: yes
+site: bookdown::bookdown_site
+description: Exemplo de livro.
+github-repo: yihui/bookdown-crc
+#cover-image: images/cover.jpg
+output:
+  bookdown::pdf_book:
+    includes:
+      in_header: tex/preamble_yihui_crc.tex
+      before_body: tex/before_body_yihui_crc.tex
+      after_body: tex/after_body_yihui_crc.tex
+    keep_tex: yes
+    dev: "cairo_pdf"
+    latex_engine: xelatex
+    citation_package: natbib
+    template: null
+    toc_depth: 3
+    toc_unnumbered: no
+    toc_appendix: yes
+    quote_footer: ["\\VA{", "}{}"]
+  word_document: default
+  pdf_document: default
+  number_sections: true
 ---
 
-# Prerequisites
+# Prefácio
+
 
 This is a _sample_ book written in **Markdown**. You can use anything that Pandoc's Markdown supports, e.g., a math equation $a^2 + b^2 = c^2$.
 
@@ -26,7 +49,7 @@ install.packages("bookdown")
 
 Remember each Rmd file contains one and only one chapter, and a chapter is defined by the first-level heading `#`.
 
-To compile this example to PDF, you need XeLaTeX. You are recommended to install TinyTeX (which includes XeLaTeX): <https://yihui.name/tinytex/>.
+To compile this example to PDF, you need XeLaTeX. You are recommended to install TinyTeX (which includes XeLaTeX): <https://yihui.org/tinytex/>.
 
 ```{r include=FALSE}
 # automatically create a bib database for R packages
@@ -34,3 +57,18 @@ knitr::write_bib(c(
   .packages(), 'bookdown', 'knitr', 'rmarkdown'
 ), 'packages.bib')
 ```
+
+
+## Informação do Software
+
+Este material foi densenvolvido completamente em [Rmarkdown](https://rmarkdown.rstudio.com/). Para a execução dos
+exemplos e exercícios, o usuário precisará instalar a linguagem [R](https://rproject.org/) e um ambiente de desenvolvimento integrado (IDE - integrated development environment) da sua preferência. Particularmente, sugere-se o uso do [RStudio](https://www.rstudio.com/).
+Os pacotes necessários estão listados a seguir:
+
+```{r include=TRUE}
+sessionInfo()
+```
+
+## Agradecimentos
+
+
