@@ -1,0 +1,47 @@
+---
+output:
+  html_document: default
+  pdf_document: 
+    toc: yes
+    keep_tex: yes
+---
+
+# O pacote dplyr {#dplyr}
+
+Placeholder
+
+
+## Filtros {#sec:filter}
+### Filtros com uma ou mais condições
+### Filtros com critérios numéricos
+### Filtros com dados faltantes
+### Filtros com outros operadores
+## arrange {#sec:arrange}
+## mutate {#sec:mutate}
+## rename {#sec:rename}
+## select {#sec:select}
+## summarise {#sec:summarise}
+##  Exercícios 
+
+<!--chapter:end:03-dplyr.Rmd-->
+
+---
+output:
+  html_document: default
+  pdf_document: 
+    toc: yes
+    keep_tex: yes
+---
+<style> body {text-align: justify} </style> <!-- Justify text. -->
+
+
+# Mapas
+
+Some _significant_ applications are demonstrated in this chapter.
+
+## Example one
+
+## Example two
+
+<!--chapter:end:04-mapas.Rmd-->
+

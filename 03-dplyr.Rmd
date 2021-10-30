@@ -7,7 +7,7 @@ output:
 ---
 <style> body {text-align: justify} </style> <!-- Justify text. -->
 
-# O pacote dplyr {#chapter:dplyr}
+# O pacote dplyr {#dplyr}
 
 O pacote `dplyr` pode ser considerado um dos mais úteis na etapa de manipulação 
 de conjuntos de dados no R. Suas regras lógicas e consistentes tornam seus 
