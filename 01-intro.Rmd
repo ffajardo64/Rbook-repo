@@ -1,4 +1,48 @@
-# Introduction {#intro}
+---
+output:
+  html_document: default
+  pdf_document: 
+    toc: yes
+    keep_tex: yes
+---
+<style> body {text-align: justify} </style> <!-- Justify text. -->
+
+# Introdução {#intro}
+
+[R](https://rproject.org/) é uma linguagem de programação muito popular entre pesquisadores e analistas de dados. A linguagem, desenvolvida por volta dos anos 70's por _Ross Ihaka_ e _Robert Gentleman_ no Departamento de Estatística da Universidade de Auckland, Nova Zelândia, concentra-se na implementação de ferramentas para análise estatística de dados.
+Atualmente é mantido por uma comunidade de colaboradores voluntários que contribuem com o melhoramento do código fonte da linguagem e com a expansão das suas funcionalidades. 
+
+A linguagem, criada como uma alternativa de código aberto por volta dos anos 90's, é utilizada por estatísticos, cientistas, economistas, biólogos, engenheiros e, mais recentemente, _cientistas de dados_, como uma 
+ferramenta sofisticada para a análise exploratória e visualização de dados. Ao contrário do que se imagina sobre a linguagem R, ela não se limitada apenas a sessões iterativas, pois devido ao fato de ser uma linguagem de programação, os _scripts_ podem ser criados e compactados em bibliotecas. As mesmas proporcionam funcionalidades extras para a obtenção de resultados mais consistentes e confiáveis.
+
+A linguagem R tem sido uma referência na análise estatística durante muitos anos. A obtenção e 
+distribuição são gratuítas e está sob a Licença Pública Geral (GPL) do projeto colaborativo de Software 
+livre GNU. Dessa forma, sendo um programa de código aberto, R é, portanto, livre,
+mas acima de tudo, é o resultado do esforço de milhares de pessoas ao redor do mundo que colaboram no
+seu desenvolvimento. Isso permite solucionar erros de programação (bugs) mais rapidamente e desenvolver
+pacotes especializados para análises específicas. 
+
+A princípio, o primeiro contato com a linguagem pode, eventualmente, causar um certo abalo para aqueles 
+usuários acostumados a manipular programas de computador com menus e ajuda do _mouse_. O motivo é muito 
+simples: O R é é uma linguagem interpretada, pois os códigos são executados por um _interpretador_.
+```{r, out.width='50%', fig.align='center', fig.cap='Primeiro contato com R. Desenho adaptado das ilustrações de [Allison Horst](https://github.com/allisonhorst).',echo=FALSE}
+knitr::include_graphics('images/R_primeiro.png')
+```
+No entanto, depois de ter superado naturalmente esse obstáculo, esses usuários perceberão que o uso de uma IDE adequada, junto com a utilização de pequenos _scripts_, facilitá a execução de uma longa seqüência de operações de forma mais eficiente, do que uma fatigante sessão de ”clics” com o _mouse_. Os _scripts_ permitem repetir facilmente o mesmo procedimento com diferentes conjuntos de dados, além disso, reduz consideravelmente a possibilidade
+de cometer erros em uma sequência rotineira de operações.
+
+Frequentemente são disponibilizados novos pacotes de R que facilitam o trabalho do analista de dados. Tais pacotes estão disponíveis por data de publicação no site do [CRAN](https://nbcgib.uesc.br/mirrors/cran/web/packages/available_packages_by_date.html) (_Comprehensive R Archive Network_). No site do projeto, os usuários podem encontrar documentação adicional e toda a informação referente à linguagem de programação.
+
+
+## Porque ler este livro?
+Este livro destina-se a usuários com conhecimento básico em análise exploratória de dados que desejam iniciar a 
+gestão e análise de dados espaciais com R. Portanto, não requer nenhum conhecimento prévio deste programa, mas um conhecimento básico do SIG. O livro pretende permitir ao leitor dar os primeiros passos na gestão de R para a análise
+espacial sem muitos tropeços. Para continuar com aplicativos mais avançados, há um ótimo número de fontes de
+informação (MELHORAR).
+
+
+
+## Estrutura do livro
 
 You can label chapter and section titles using `{#label}` after them, e.g., we can reference Chapter \@ref(intro). If you do not manually label them, there will be automatic labels anyway, e.g., Chapter \@ref(methods).
 
