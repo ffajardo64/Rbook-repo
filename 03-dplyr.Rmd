@@ -1,0 +1,274 @@
+---
+output:
+  html_document: default
+  pdf_document: 
+    toc: yes
+    keep_tex: yes
+---
+<style> body {text-align: justify} </style> <!-- Justify text. -->
+
+# O pacote dplyr {#chapter:dplyr}
+
+O pacote `dplyr` pode ser considerado um dos mais úteis na etapa de manipulação 
+de conjuntos de dados no R. Suas regras lógicas e consistentes tornam seus 
+códigos mais simples, elegantes e eficientes, não é por nada que o pacote é 
+considerado o "_canivete suíço_" na manipulação de dados. 
+
+O pacote contém um conjunto de funções (ou "verbos") 
+que realizam operações comuns de manipulação de dados, como: filtragem de linhas, 
+seleção de colunas específicas, reordenamento de linhas, adição de novas colunas,
+operações de agrupamento e resumo de dados, entre outras. Os scripts em R que 
+fazem uso inteligente das funções do pacote `dplyr` e as facilidades do operador
+`pipe` tendem a ficar mais legíveis, organizados e, pelo fato do pacote `dplyr` 
+utilizar  linguagem _C_ e _C++_ na implementação da maioria das funções, os 
+códigos se tornam mais eficientes, enquanto a tempos de execução.
+
+Uma listagem completa dessas funções está disponível no [manual de referência](https://dplyr.tidyverse.org/reference/index.html) do pacote `dplyr`.
+O objeto de entrada nessas funções deve ser `dataframe` ou `tibble` e a saída 
+manterá essa natureza.
+
+A seguir são apresentadas algumas operação típicas na manipulação
+de conjuntos de dados e as funções adequadas para tal. Alguns exemplos apresentados
+utilizam conjuntos de dados integrados na instalação típica do R.
+
+
+## Filtros {#sec:filter}
+Os filtros são uma maneira útil de visualizar apenas os dados que você deseja 
+exibir no conjunto de observações. A aplicação de filtros é uma forma interessante 
+de criar subconjuntos de dados, sujeitos a uma ou mais condições específicas.
+O usuário pode usar filtros para exibir registros específicos, realizar 
+consultas ou para mostrar apenas determinados registros do conjunto. 
+Ao aplicar um filtro, você pode limitar os dados em um exibição sem alterar seu 
+conjunto de dados original.
+
+A função para a execução de filtros é `filter`, que permite selecionar registros
+(linhas ou colunas) de acordo com uma ou mais condições pre-estabelecidas.
+
+Para mostrar algumas funcionalidade da função, utilizaremos o conjunto de dados
+com as características das personagens do filme *Starwars*, disponível no 
+pacote `dplyr`. O conjunto está formado por 87 personagens e 14 
+características de cada personagem.
+
+
+### Filtros com uma ou mais condições
+Nesse conjunto de dados, as características serão consideradas as variáveis de 
+interesse. Usando a função `name` é possível visualizar os nomes das variáveis:
+```{r eval=TRUE, message = FALSE, echo=FALSE}
+library("dplyr"); library("magrittr"); library("Hmisc")
+names(starwars)
+```
+
+Suponha que temos interesse em visualizar as personagens com cor de olhos 
+vermelhos. Para isso podemos usar as seguintes alternativas:
+
+**Alternativa 1.**
+```{r eval=FALSE}
+# Filtra as personagens com olhos vermelhos
+olhos.vermelhos <- filter(starwars, eye_color == "red")
+olhos.vermelhos
+```
+
+**Alternativa 2.** Usando o operador `pipe`
+```{r eval=TRUE}
+# Usando o operador pipe. Você precisa carregar o pacote  magrittr
+# library("magrittr")
+olhos.vermelhos <- starwars%>%
+  filter(eye_color == "red")
+olhos.vermelhos
+```
+**_Observação:_** Nas condições da função `filter` resulta necessário o uso dos 
+operadores de comparação do R. No exemplo, o operador "==" é usado para indicar 
+a condição de _igualdade_. Outros operadores de comparação podem ser bastante 
+úteis na execução dos filtros. Para detalhes, sugere-se revisar a Seção 
+{**INDICAR O NUMERO DA SEÇÃO**}. Da mesma forma, pode-se observar que o resultado
+do filtro é um objeto do tipo `tibble`.
+
+> Filtros com múltiplas condições
+
+A necessidade de aplicar filtros com múltiplas condições resulta um tarefa
+comum na análise de conjuntos de dados mais complexos. Os usuários
+podem recorrer à combinação do uso de operadores lógicos, operadores 
+de comparação ou simplesmente aumentando o número de condições do filtro.
+
+* Imagine que o usuário tem a necessidade de identificar os *droides* com 
+*olhos vermelhos*. Para isso, as condições do filtro podem ser separadas por 
+vírgulas:
+
+```{r eval=FALSE}
+starwars%>%
+  filter(species == "Droid", eye_color=="red")
+```
+ou equivalentemente, podemos usar o operador lógico "\&":
+```{r eval=TRUE}
+starwars%>%
+  filter(species == "Droid" & eye_color=="red")
+```
+
+* Outros operadores lógicos poder resultar bastante úteis na hora de filtrar o
+conjunto de dados. No exemplo, nosso interesse é mostrar as personagens 
+femeninas, sejam elas humanas ou droides:
+
+```{r eval=TRUE}
+starwars%>%
+  filter((species == "Human" | species=="Droid") & gender=="feminine")
+```
+
+**_Observação:_** Para execução do filtro, foi necessário o uso dos parênteses, 
+pois a intenção era considerar só duas espécies do conjunto (*humanos e droides*).
+O resultado ao desconsiderar os parênteses será diferente, pois será preservada
+a hierarquia dos operadores lógicos. Nesse caso, a ausência dos parênteses terá
+o mesmo efeito que:
+
+```{r eval=FALSE}
+starwars%>%
+  filter(species == "Human" | (species=="Droid" & gender=="feminine"))
+```
+
+
+
+### Filtros com critérios numéricos
+Os critérios numéricos são úteis para identificar rapidamente algumas
+informações específicas do conjunto. Nesse sentido, todas aquelas funções
+disponíveis na instalação típica do R, tais como: `min`, `max`, `mean`,
+`sd`, entre outras, são úteis para estabelecer tais critérios. Ainda,
+os usuários também podem optar pelo uso de funções propriamente definidas.
+
+Dessa vez, nosso interesse está em descobrir qual dos humanos da universo starwars 
+está acima do peso médio.
+
+```{r eval=TRUE}
+starwars%>%
+  filter(species == "Human" & mass > mean(mass, na.rm = TRUE))
+```
+
+Lembre que, estamos considerando só $87$ personagens. Mas, você esperava que 
+*Darth Vader* liderara esse ranking? Se levarmos em consideração a relação 
+*altura x peso*, o resultado tem um pouco de sentido. Mas, só por curiosidade, 
+*Darth Vader* será a personagem mais pesada do conjunto? O seguinte código 
+proporciona a resposta à pergunta:
+```{r eval=TRUE}
+starwars%>%
+  filter(mass==max(mass,na.rm = TRUE) | mass==min(mass,na.rm = TRUE))
+```
+O resultado da execução do código acima, permite afirmar que o peso pesado,
+entre as personagens do conjunto, é **Jabba Desilijic Tiure** da espécie Hutt. 
+Um dado curioso sobre Jabba é que ele é um *hermafrodita* de 600 anos, pois é...
+nem eu mesmo sabia disso! 
+
+```{r, out.width='20%', out.extra='style="float:right; padding:10px"', echo=FALSE}
+knitr::include_graphics("images/RattsHS.png")
+```
+
+Outro dado curioso aparece quando descobre-se que o **Ratts Tyerell** é a
+personagem com o menor peso dentre as personagens do conjunto. Quem não sabe quem
+é o **Ratts Tyerell**... Eis a foto do bonitão ao lado. A espécie dele é *Aleena* 
+e é do sistema *Aleen Minor*, isso mesmo, o sistema *Aleen Minor* era um sistema 
+estelar localizado na *Orla interior* (Tradução livre de *Inner Rim*). Para quem
+não lembra, o **Ratts Tyerell** apareceu no filme *A ameaça fantasma* de 1999.
+
+### Filtros com dados faltantes
+
+Você deve ter percebido que, nas funções utilizadas nos critérios 
+do filtro, o parâmetro `na.rm` foi considerado para informar que a função 
+deve <b>desconsiderar</b> os dados faltantes na hora de realizar os cálculos. Na 
+ausência desse parâmetro as funções notificarão um erro na execução do código.
+
+Por outro lado, a função `is.na()` pode proporcionar uma forma alternativa para 
+obter a mesma informação. A função `is.na()` avalia a presença de valores 
+faltantes no conjunto. Lembre que os valores `NA` (*Not Avalilable*) são 
+constantes lógicas que indicam a 
+presença de um valor faltante. Dessa forma, se temos interesse em replicar o 
+exemplo anterior usando a função `is.na()`, será necessária a aplicação de dois 
+filtros. O primeiro para filtrar as personagens 
+com valores dos pesos informados no conjunto de dados, ou seja, aquelas que não 
+apresentaram valores faltantes, e o segundo para filtrar as personagens com 
+maior ou menor peso, da seguinte forma:
+
+```{r eval=FALSE}
+starwars%>%
+  filter(!is.na(mass))%>%
+  filter(mass==max(mass) | mass==min(mass))
+```
+**_Observação:_** Nesse caso, foi necesário o uso do operador de negação `!`, 
+pois inicialmente foi necessário filtrar as personagens com com pesos informados.
+
+Com a função `drop_na()`, do pacote `tidyr`, temos uma outra alternativa para 
+obter o mesmo resultado. A função `drop_na()` elimina as linhas com valores 
+faltantes. O usuário pode optar por informar à função se a mesma deve considerar
+uma ou mais colunas do conjunto de dados. Para nosso exemplo, consideramos 
+exclusivamente a variável **mass**, pois é a variável que indica os pesos das 
+personagens.
+
+```{r eval=FALSE}
+starwars%>%
+  tidyr::drop_na(mass)%>%
+  filter(mass==max(mass) | mass==min(mass))
+```
+
+> Operador \%in\%
+
+O operador `%in%`é uma opção poderosa e muito conveniente
+para incluir/excluir valores especificados.
+
+`Hmisc`
+
+
+
+```{r eval=FALSE}
+starwars%>%
+  filter(mass %nin% c(NA))%>%
+  filter(mass==max(mass) | mass==min(mass))
+```
+
+
+```{r eval=FALSE}
+starwars%>%
+  filter(species %in% c("Human","Droid"))
+```
+
+### Filtros com outros operadores
+
+
+```{r eval=FALSE}
+starwars%>%
+  filter(species == "Ewok" & eye_color=="brown", is.na(height))
+```
+
+
+**_Observação:_** O resultado do código usando a vírgula como sepador de condições
+é equivalente ao uso do operador .
+
+
+
+## arrange {#sec:arrange}
+Ordena as linhas do data frame.
+
+
+
+## mutate {#sec:mutate}
+Cria uma nova variável que seja uma função entre variáveis que já existem
+
+## rename {#sec:rename}
+Renomear o nome das variáveis.
+
+## select {#sec:select}
+Seleciona colunas que já existem pelo nome delas.
+
+## summarise {#sec:summarise}
+Calcula valores para uma coluna. Ex: soma total, mínimo, máximo, média, desvio padrão, etc.
+
+
+
+_______________________________________________________________________________
+
+
+##  Exercícios 
+
+1. Qual o resultado da execução do seguinte código?
+
+```{r eval=FALSE}
+starwars%>%
+  filter(species == "Ewok" & eye_color=="brown", height>76)
+```
+
+________________________________________________________________________________
