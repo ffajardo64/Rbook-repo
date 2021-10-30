@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>1 O pacote dplyr | Rbookv1.knit</title>
+  <meta name="description" content="" />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="1 O pacote dplyr | Rbookv1.knit" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="1 O pacote dplyr | Rbookv1.knit" />
+  
+  
+  
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+
+<link rel="next" href="mapas.html"/>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Introdução à Ciência de Dados com R</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="chapter-dplyr.html"><a href="chapter-dplyr.html"><i class="fa fa-check"></i><b>1</b> O pacote dplyr</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="chapter-dplyr.html"><a href="chapter-dplyr.html#sec:filter"><i class="fa fa-check"></i><b>1.1</b> Filtros</a>
+<ul>
+<li class="chapter" data-level="1.1.1" data-path="chapter-dplyr.html"><a href="chapter-dplyr.html#filtros-com-uma-ou-mais-condições"><i class="fa fa-check"></i><b>1.1.1</b> Filtros com uma ou mais condições</a></li>
+<li class="chapter" data-level="1.1.2" data-path="chapter-dplyr.html"><a href="chapter-dplyr.html#filtros-com-critérios-numéricos"><i class="fa fa-check"></i><b>1.1.2</b> Filtros com critérios numéricos</a></li>
+<li class="chapter" data-level="1.1.3" data-path="chapter-dplyr.html"><a href="chapter-dplyr.html#filtros-com-dados-faltantes"><i class="fa fa-check"></i><b>1.1.3</b> Filtros com dados faltantes</a></li>
+<li class="chapter" data-level="1.1.4" data-path="chapter-dplyr.html"><a href="chapter-dplyr.html#filtros-com-outros-operadores"><i class="fa fa-check"></i><b>1.1.4</b> Filtros com outros operadores</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="chapter-dplyr.html"><a href="chapter-dplyr.html#sec:arrange"><i class="fa fa-check"></i><b>1.2</b> arrange</a></li>
+<li class="chapter" data-level="1.3" data-path="chapter-dplyr.html"><a href="chapter-dplyr.html#sec:mutate"><i class="fa fa-check"></i><b>1.3</b> mutate</a></li>
+<li class="chapter" data-level="1.4" data-path="chapter-dplyr.html"><a href="chapter-dplyr.html#sec:rename"><i class="fa fa-check"></i><b>1.4</b> rename</a></li>
+<li class="chapter" data-level="1.5" data-path="chapter-dplyr.html"><a href="chapter-dplyr.html#sec:select"><i class="fa fa-check"></i><b>1.5</b> select</a></li>
+<li class="chapter" data-level="1.6" data-path="chapter-dplyr.html"><a href="chapter-dplyr.html#sec:summarise"><i class="fa fa-check"></i><b>1.6</b> summarise</a></li>
+<li class="chapter" data-level="1.7" data-path="chapter-dplyr.html"><a href="chapter-dplyr.html#exercícios"><i class="fa fa-check"></i><b>1.7</b> Exercícios</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="mapas.html"><a href="mapas.html"><i class="fa fa-check"></i><b>2</b> Mapas</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="mapas.html"><a href="mapas.html#example-one"><i class="fa fa-check"></i><b>2.1</b> Example one</a></li>
+<li class="chapter" data-level="2.2" data-path="mapas.html"><a href="mapas.html#example-two"><i class="fa fa-check"></i><b>2.2</b> Example two</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"></a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<!--bookdown:title:end-->
+<!--bookdown:title:start-->
+<div id="chapter:dplyr" class="section level1" number="1">
+<h1><span class="header-section-number">1</span> O pacote dplyr</h1>
+<p>O pacote <code>dplyr</code> pode ser considerado um dos mais úteis na etapa de manipulação
+de conjuntos de dados no R. Suas regras lógicas e consistentes tornam seus
+códigos mais simples, elegantes e eficientes, não é por nada que o pacote é
+considerado o “<em>canivete suíço</em>” na manipulação de dados.</p>
+<p>O pacote contém um conjunto de funções (ou “verbos”)
+que realizam operações comuns de manipulação de dados, como: filtragem de linhas,
+seleção de colunas específicas, reordenamento de linhas, adição de novas colunas,
+operações de agrupamento e resumo de dados, entre outras. Os scripts em R que
+fazem uso inteligente das funções do pacote <code>dplyr</code> e as facilidades do operador
+<code>pipe</code> tendem a ficar mais legíveis, organizados e, pelo fato do pacote <code>dplyr</code>
+utilizar linguagem <em>C</em> e <em>C++</em> na implementação da maioria das funções, os
+códigos se tornam mais eficientes, enquanto a tempos de execução.</p>
+<p>Uma listagem completa dessas funções está disponível no <a href="https://dplyr.tidyverse.org/reference/index.html">manual de referência</a> do pacote <code>dplyr</code>.
+O objeto de entrada nessas funções deve ser <code>dataframe</code> ou <code>tibble</code> e a saída
+manterá essa natureza.</p>
+<p>A seguir são apresentadas algumas operação típicas na manipulação
+de conjuntos de dados e as funções adequadas para tal. Alguns exemplos apresentados
+utilizam conjuntos de dados integrados na instalação típica do R.</p>
+<div id="sec:filter" class="section level2" number="1.1">
+<h2><span class="header-section-number">1.1</span> Filtros</h2>
+<p>Os filtros são uma maneira útil de visualizar apenas os dados que você deseja
+exibir no conjunto de observações. A aplicação de filtros é uma forma interessante
+de criar subconjuntos de dados, sujeitos a uma ou mais condições específicas.
+O usuário pode usar filtros para exibir registros específicos, realizar
+consultas ou para mostrar apenas determinados registros do conjunto.
+Ao aplicar um filtro, você pode limitar os dados em um exibição sem alterar seu
+conjunto de dados original.</p>
+<p>A função para a execução de filtros é <code>filter</code>, que permite selecionar registros
+(linhas ou colunas) de acordo com uma ou mais condições pre-estabelecidas.</p>
+<p>Para mostrar algumas funcionalidade da função, utilizaremos o conjunto de dados
+com as características das personagens do filme <em>Starwars</em>, disponível no
+pacote <code>dplyr</code>. O conjunto está formado por 87 personagens e 14
+características de cada personagem.</p>
+<div id="filtros-com-uma-ou-mais-condições" class="section level3" number="1.1.1">
+<h3><span class="header-section-number">1.1.1</span> Filtros com uma ou mais condições</h3>
+<p>Nesse conjunto de dados, as características serão consideradas as variáveis de
+interesse. Usando a função <code>name</code> é possível visualizar os nomes das variáveis:</p>
+<pre><code>##  [1] &quot;name&quot;       &quot;height&quot;     &quot;mass&quot;       &quot;hair_color&quot; &quot;skin_color&quot;
+##  [6] &quot;eye_color&quot;  &quot;birth_year&quot; &quot;sex&quot;        &quot;gender&quot;     &quot;homeworld&quot; 
+## [11] &quot;species&quot;    &quot;films&quot;      &quot;vehicles&quot;   &quot;starships&quot;</code></pre>
+<p>Suponha que temos interesse em visualizar as personagens com cor de olhos
+vermelhos. Para isso podemos usar as seguintes alternativas:</p>
+<p><strong>Alternativa 1.</strong></p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="chapter-dplyr.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Filtra as personagens com olhos vermelhos</span></span>
+<span id="cb2-2"><a href="chapter-dplyr.html#cb2-2" aria-hidden="true" tabindex="-1"></a>olhos.vermelhos <span class="ot">&lt;-</span> <span class="fu">filter</span>(starwars, eye_color <span class="sc">==</span> <span class="st">&quot;red&quot;</span>)</span>
+<span id="cb2-3"><a href="chapter-dplyr.html#cb2-3" aria-hidden="true" tabindex="-1"></a>olhos.vermelhos</span></code></pre></div>
+<p><strong>Alternativa 2.</strong> Usando o operador <code>pipe</code></p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="chapter-dplyr.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Usando o operador pipe. Você precisa carregar o pacote  magrittr</span></span>
+<span id="cb3-2"><a href="chapter-dplyr.html#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># library(&quot;magrittr&quot;)</span></span>
+<span id="cb3-3"><a href="chapter-dplyr.html#cb3-3" aria-hidden="true" tabindex="-1"></a>olhos.vermelhos <span class="ot">&lt;-</span> starwars<span class="sc">%&gt;%</span></span>
+<span id="cb3-4"><a href="chapter-dplyr.html#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(eye_color <span class="sc">==</span> <span class="st">&quot;red&quot;</span>)</span>
+<span id="cb3-5"><a href="chapter-dplyr.html#cb3-5" aria-hidden="true" tabindex="-1"></a>olhos.vermelhos</span></code></pre></div>
+<pre><code>## # A tibble: 5 x 14
+##   name    height  mass hair_color skin_color  eye_color birth_year sex   gender 
+##   &lt;chr&gt;    &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;       &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;  
+## 1 R2-D2       96    32 &lt;NA&gt;       white, blue red               33 none  mascul…
+## 2 R5-D4       97    32 &lt;NA&gt;       white, red  red               NA none  mascul…
+## 3 IG-88      200   140 none       metal       red               15 none  mascul…
+## 4 Bossk      190   113 none       green       red               53 male  mascul…
+## 5 Nute G…    191    90 none       mottled gr… red               NA male  mascul…
+## # … with 5 more variables: homeworld &lt;chr&gt;, species &lt;chr&gt;, films &lt;list&gt;,
+## #   vehicles &lt;list&gt;, starships &lt;list&gt;</code></pre>
+<p><strong><em>Observação:</em></strong> Nas condições da função <code>filter</code> resulta necessário o uso dos
+operadores de comparação do R. No exemplo, o operador “==” é usado para indicar
+a condição de <em>igualdade</em>. Outros operadores de comparação podem ser bastante
+úteis na execução dos filtros. Para detalhes, sugere-se revisar a Seção
+{<strong>INDICAR O NUMERO DA SEÇÃO</strong>}. Da mesma forma, pode-se observar que o resultado
+do filtro é um objeto do tipo <code>tibble</code>.</p>
+<blockquote>
+<p>Filtros com múltiplas condições</p>
+</blockquote>
+<p>A necessidade de aplicar filtros com múltiplas condições resulta um tarefa
+comum na análise de conjuntos de dados mais complexos. Os usuários
+podem recorrer à combinação do uso de operadores lógicos, operadores
+de comparação ou simplesmente aumentando o número de condições do filtro.</p>
+<ul>
+<li>Imagine que o usuário tem a necessidade de identificar os <em>droides</em> com
+<em>olhos vermelhos</em>. Para isso, as condições do filtro podem ser separadas por
+vírgulas:</li>
+</ul>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="chapter-dplyr.html#cb5-1" aria-hidden="true" tabindex="-1"></a>starwars<span class="sc">%&gt;%</span></span>
+<span id="cb5-2"><a href="chapter-dplyr.html#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(species <span class="sc">==</span> <span class="st">&quot;Droid&quot;</span>, eye_color<span class="sc">==</span><span class="st">&quot;red&quot;</span>)</span></code></pre></div>
+<p>ou equivalentemente, podemos usar o operador lógico “&amp;”:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="chapter-dplyr.html#cb6-1" aria-hidden="true" tabindex="-1"></a>starwars<span class="sc">%&gt;%</span></span>
+<span id="cb6-2"><a href="chapter-dplyr.html#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(species <span class="sc">==</span> <span class="st">&quot;Droid&quot;</span> <span class="sc">&amp;</span> eye_color<span class="sc">==</span><span class="st">&quot;red&quot;</span>)</span></code></pre></div>
+<pre><code>## # A tibble: 3 x 14
+##   name  height  mass hair_color skin_color  eye_color birth_year sex   gender   
+##   &lt;chr&gt;  &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;       &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;    
+## 1 R2-D2     96    32 &lt;NA&gt;       white, blue red               33 none  masculine
+## 2 R5-D4     97    32 &lt;NA&gt;       white, red  red               NA none  masculine
+## 3 IG-88    200   140 none       metal       red               15 none  masculine
+## # … with 5 more variables: homeworld &lt;chr&gt;, species &lt;chr&gt;, films &lt;list&gt;,
+## #   vehicles &lt;list&gt;, starships &lt;list&gt;</code></pre>
+<ul>
+<li>Outros operadores lógicos poder resultar bastante úteis na hora de filtrar o
+conjunto de dados. No exemplo, nosso interesse é mostrar as personagens
+femeninas, sejam elas humanas ou droides:</li>
+</ul>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="chapter-dplyr.html#cb8-1" aria-hidden="true" tabindex="-1"></a>starwars<span class="sc">%&gt;%</span></span>
+<span id="cb8-2"><a href="chapter-dplyr.html#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>((species <span class="sc">==</span> <span class="st">&quot;Human&quot;</span> <span class="sc">|</span> species<span class="sc">==</span><span class="st">&quot;Droid&quot;</span>) <span class="sc">&amp;</span> gender<span class="sc">==</span><span class="st">&quot;feminine&quot;</span>)</span></code></pre></div>
+<pre><code>## # A tibble: 10 x 14
+##    name     height  mass hair_color skin_color eye_color birth_year sex   gender
+##    &lt;chr&gt;     &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
+##  1 Leia Or…    150    49 brown      light      brown             19 fema… femin…
+##  2 Beru Wh…    165    75 brown      light      blue              47 fema… femin…
+##  3 Mon Mot…    150    NA auburn     fair       blue              48 fema… femin…
+##  4 Shmi Sk…    163    NA black      fair       brown             72 fema… femin…
+##  5 Cordé       157    NA brown      light      brown             NA fema… femin…
+##  6 Dormé       165    NA brown      light      brown             NA fema… femin…
+##  7 Jocasta…    167    NA white      fair       blue              NA fema… femin…
+##  8 R4-P17       96    NA none       silver, r… red, blue         NA none  femin…
+##  9 Rey          NA    NA brown      light      hazel             NA fema… femin…
+## 10 Padmé A…    165    45 brown      light      brown             46 fema… femin…
+## # … with 5 more variables: homeworld &lt;chr&gt;, species &lt;chr&gt;, films &lt;list&gt;,
+## #   vehicles &lt;list&gt;, starships &lt;list&gt;</code></pre>
+<p><strong><em>Observação:</em></strong> Para execução do filtro, foi necessário o uso dos parênteses,
+pois a intenção era considerar só duas espécies do conjunto (<em>humanos e droides</em>).
+O resultado ao desconsiderar os parênteses será diferente, pois será preservada
+a hierarquia dos operadores lógicos. Nesse caso, a ausência dos parênteses terá
+o mesmo efeito que:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="chapter-dplyr.html#cb10-1" aria-hidden="true" tabindex="-1"></a>starwars<span class="sc">%&gt;%</span></span>
+<span id="cb10-2"><a href="chapter-dplyr.html#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(species <span class="sc">==</span> <span class="st">&quot;Human&quot;</span> <span class="sc">|</span> (species<span class="sc">==</span><span class="st">&quot;Droid&quot;</span> <span class="sc">&amp;</span> gender<span class="sc">==</span><span class="st">&quot;feminine&quot;</span>))</span></code></pre></div>
+</div>
+<div id="filtros-com-critérios-numéricos" class="section level3" number="1.1.2">
+<h3><span class="header-section-number">1.1.2</span> Filtros com critérios numéricos</h3>
+<p>Os critérios numéricos são úteis para identificar rapidamente algumas
+informações específicas do conjunto. Nesse sentido, todas aquelas funções
+disponíveis na instalação típica do R, tais como: <code>min</code>, <code>max</code>, <code>mean</code>,
+<code>sd</code>, entre outras, são úteis para estabelecer tais critérios. Ainda,
+os usuários também podem optar pelo uso de funções propriamente definidas.</p>
+<p>Dessa vez, nosso interesse está em descobrir qual dos humanos da universo starwars
+está acima do peso médio.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="chapter-dplyr.html#cb11-1" aria-hidden="true" tabindex="-1"></a>starwars<span class="sc">%&gt;%</span></span>
+<span id="cb11-2"><a href="chapter-dplyr.html#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(species <span class="sc">==</span> <span class="st">&quot;Human&quot;</span> <span class="sc">&amp;</span> mass <span class="sc">&gt;</span> <span class="fu">mean</span>(mass, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code></pre></div>
+<pre><code>## # A tibble: 3 x 14
+##   name     height  mass hair_color  skin_color eye_color birth_year sex   gender
+##   &lt;chr&gt;     &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;       &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
+## 1 Darth V…    202   136 none        white      yellow          41.9 male  mascu…
+## 2 Owen La…    178   120 brown, grey light      blue            52   male  mascu…
+## 3 Jek Ton…    180   110 brown       fair       blue            NA   male  mascu…
+## # … with 5 more variables: homeworld &lt;chr&gt;, species &lt;chr&gt;, films &lt;list&gt;,
+## #   vehicles &lt;list&gt;, starships &lt;list&gt;</code></pre>
+<p>Lembre que, estamos considerando só <span class="math inline">\(87\)</span> personagens. Mas, você esperava que
+<em>Darth Vader</em> liderara esse ranking? Se levarmos em consideração a relação
+<em>altura x peso</em>, o resultado tem um pouco de sentido. Mas, só por curiosidade,
+<em>Darth Vader</em> será a personagem mais pesada do conjunto? O seguinte código
+proporciona a resposta à pergunta:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="chapter-dplyr.html#cb13-1" aria-hidden="true" tabindex="-1"></a>starwars<span class="sc">%&gt;%</span></span>
+<span id="cb13-2"><a href="chapter-dplyr.html#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(mass<span class="sc">==</span><span class="fu">max</span>(mass,<span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">|</span> mass<span class="sc">==</span><span class="fu">min</span>(mass,<span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code></pre></div>
+<pre><code>## # A tibble: 2 x 14
+##   name    height  mass hair_color skin_color  eye_color birth_year sex    gender
+##   &lt;chr&gt;    &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;       &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt; 
+## 1 Jabba …    175  1358 &lt;NA&gt;       green-tan,… orange           600 herma… mascu…
+## 2 Ratts …     79    15 none       grey, blue  unknown           NA male   mascu…
+## # … with 5 more variables: homeworld &lt;chr&gt;, species &lt;chr&gt;, films &lt;list&gt;,
+## #   vehicles &lt;list&gt;, starships &lt;list&gt;</code></pre>
+<p>O resultado da execução do código acima, permite afirmar que o peso pesado,
+entre as personagens do conjunto, é <strong>Jabba Desilijic Tiure</strong> da espécie Hutt.
+Um dado curioso sobre Jabba é que ele é um <em>hermafrodita</em> de 600 anos, pois é…
+nem eu mesmo sabia disso!</p>
+<p><img src="images/RattsHS.png" width="20%" style="float:right; padding:10px" /></p>
+<p>Outro dado curioso aparece quando descobre-se que o <strong>Ratts Tyerell</strong> é a
+personagem com o menor peso dentre as personagens do conjunto. Quem não sabe quem
+é o <strong>Ratts Tyerell</strong>… Eis a foto do bonitão ao lado. A espécie dele é <em>Aleena</em>
+e é do sistema <em>Aleen Minor</em>, isso mesmo, o sistema <em>Aleen Minor</em> era um sistema
+estelar localizado na <em>Orla interior</em> (Tradução livre de <em>Inner Rim</em>). Para quem
+não lembra, o <strong>Ratts Tyerell</strong> apareceu no filme <em>A ameaça fantasma</em> de 1999.</p>
+</div>
+<div id="filtros-com-dados-faltantes" class="section level3" number="1.1.3">
+<h3><span class="header-section-number">1.1.3</span> Filtros com dados faltantes</h3>
+<p>Você deve ter percebido que, nas funções utilizadas nos critérios
+do filtro, o parâmetro <code>na.rm</code> foi considerado para informar que a função
+deve <b>desconsiderar</b> os dados faltantes na hora de realizar os cálculos. Na
+ausência desse parâmetro as funções notificarão um erro na execução do código.</p>
+<p>Por outro lado, a função <code>is.na()</code> pode proporcionar uma forma alternativa para
+obter a mesma informação. A função <code>is.na()</code> avalia a presença de valores
+faltantes no conjunto. Lembre que os valores <code>NA</code> (<em>Not Avalilable</em>) são
+constantes lógicas que indicam a
+presença de um valor faltante. Dessa forma, se temos interesse em replicar o
+exemplo anterior usando a função <code>is.na()</code>, será necessária a aplicação de dois
+filtros. O primeiro para filtrar as personagens
+com valores dos pesos informados no conjunto de dados, ou seja, aquelas que não
+apresentaram valores faltantes, e o segundo para filtrar as personagens com
+maior ou menor peso, da seguinte forma:</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="chapter-dplyr.html#cb15-1" aria-hidden="true" tabindex="-1"></a>starwars<span class="sc">%&gt;%</span></span>
+<span id="cb15-2"><a href="chapter-dplyr.html#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(mass))<span class="sc">%&gt;%</span></span>
+<span id="cb15-3"><a href="chapter-dplyr.html#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(mass<span class="sc">==</span><span class="fu">max</span>(mass) <span class="sc">|</span> mass<span class="sc">==</span><span class="fu">min</span>(mass))</span></code></pre></div>
+<p><strong><em>Observação:</em></strong> Nesse caso, foi necesário o uso do operador de negação <code>!</code>,
+pois inicialmente foi necessário filtrar as personagens com com pesos informados.</p>
+<p>Com a função <code>drop_na()</code>, do pacote <code>tidyr</code>, temos uma outra alternativa para
+obter o mesmo resultado. A função <code>drop_na()</code> elimina as linhas com valores
+faltantes. O usuário pode optar por informar à função se a mesma deve considerar
+uma ou mais colunas do conjunto de dados. Para nosso exemplo, consideramos
+exclusivamente a variável <strong>mass</strong>, pois é a variável que indica os pesos das
+personagens.</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="chapter-dplyr.html#cb16-1" aria-hidden="true" tabindex="-1"></a>starwars<span class="sc">%&gt;%</span></span>
+<span id="cb16-2"><a href="chapter-dplyr.html#cb16-2" aria-hidden="true" tabindex="-1"></a>  tidyr<span class="sc">::</span><span class="fu">drop_na</span>(mass)<span class="sc">%&gt;%</span></span>
+<span id="cb16-3"><a href="chapter-dplyr.html#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(mass<span class="sc">==</span><span class="fu">max</span>(mass) <span class="sc">|</span> mass<span class="sc">==</span><span class="fu">min</span>(mass))</span></code></pre></div>
+<blockquote>
+<p>Operador %in%</p>
+</blockquote>
+<p>O operador <code>%in%</code>é uma opção poderosa e muito conveniente
+para incluir/excluir valores especificados.</p>
+<p><code>Hmisc</code></p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="chapter-dplyr.html#cb17-1" aria-hidden="true" tabindex="-1"></a>starwars<span class="sc">%&gt;%</span></span>
+<span id="cb17-2"><a href="chapter-dplyr.html#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(mass <span class="sc">%nin%</span> <span class="fu">c</span>(<span class="cn">NA</span>))<span class="sc">%&gt;%</span></span>
+<span id="cb17-3"><a href="chapter-dplyr.html#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(mass<span class="sc">==</span><span class="fu">max</span>(mass) <span class="sc">|</span> mass<span class="sc">==</span><span class="fu">min</span>(mass))</span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="chapter-dplyr.html#cb18-1" aria-hidden="true" tabindex="-1"></a>starwars<span class="sc">%&gt;%</span></span>
+<span id="cb18-2"><a href="chapter-dplyr.html#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(species <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;Human&quot;</span>,<span class="st">&quot;Droid&quot;</span>))</span></code></pre></div>
+</div>
+<div id="filtros-com-outros-operadores" class="section level3" number="1.1.4">
+<h3><span class="header-section-number">1.1.4</span> Filtros com outros operadores</h3>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="chapter-dplyr.html#cb19-1" aria-hidden="true" tabindex="-1"></a>starwars<span class="sc">%&gt;%</span></span>
+<span id="cb19-2"><a href="chapter-dplyr.html#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(species <span class="sc">==</span> <span class="st">&quot;Ewok&quot;</span> <span class="sc">&amp;</span> eye_color<span class="sc">==</span><span class="st">&quot;brown&quot;</span>, <span class="fu">is.na</span>(height))</span></code></pre></div>
+<p><strong><em>Observação:</em></strong> O resultado do código usando a vírgula como sepador de condições
+é equivalente ao uso do operador .</p>
+</div>
+</div>
+<div id="sec:arrange" class="section level2" number="1.2">
+<h2><span class="header-section-number">1.2</span> arrange</h2>
+<p>Ordena as linhas do data frame.</p>
+</div>
+<div id="sec:mutate" class="section level2" number="1.3">
+<h2><span class="header-section-number">1.3</span> mutate</h2>
+<p>Cria uma nova variável que seja uma função entre variáveis que já existem</p>
+</div>
+<div id="sec:rename" class="section level2" number="1.4">
+<h2><span class="header-section-number">1.4</span> rename</h2>
+<p>Renomear o nome das variáveis.</p>
+</div>
+<div id="sec:select" class="section level2" number="1.5">
+<h2><span class="header-section-number">1.5</span> select</h2>
+<p>Seleciona colunas que já existem pelo nome delas.</p>
+</div>
+<div id="sec:summarise" class="section level2" number="1.6">
+<h2><span class="header-section-number">1.6</span> summarise</h2>
+<p>Calcula valores para uma coluna. Ex: soma total, mínimo, máximo, média, desvio padrão, etc.</p>
+<hr />
+</div>
+<div id="exercícios" class="section level2" number="1.7">
+<h2><span class="header-section-number">1.7</span> Exercícios</h2>
+<ol style="list-style-type: decimal">
+<li>Qual o resultado da execução do seguinte código?</li>
+</ol>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="chapter-dplyr.html#cb20-1" aria-hidden="true" tabindex="-1"></a>starwars<span class="sc">%&gt;%</span></span>
+<span id="cb20-2"><a href="chapter-dplyr.html#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(species <span class="sc">==</span> <span class="st">&quot;Ewok&quot;</span> <span class="sc">&amp;</span> eye_color<span class="sc">==</span><span class="st">&quot;brown&quot;</span>, height<span class="sc">&gt;</span><span class="dv">76</span>)</span></code></pre></div>
+<hr />
+
+<style> body {text-align: justify} </style>
+<p><!-- Justify text. --></p>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+
+<a href="mapas.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["Rbookv1.pdf", "Rbookv1.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
