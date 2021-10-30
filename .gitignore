@@ -9,6 +9,7 @@ libs/
 .travis.yml DESCRIPTION Dockerfile _build.sh _deploy.sh now.json .gitignore*/mathjax_header.html
 # R and Rstudio specific files
 .Rproj.user
+.Rproj
 .Rhistory
 .RData
 .Ruserdata
