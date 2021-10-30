@@ -1,5 +1,28 @@
-book_filename: "bookdown-demo"
+book_filename: "Rbookv1"
+rmd_files: ["03-dplyr.Rmd","04-mapas.Rmd"] 
+#rmd_files: ["index.Rmd","01-intro.Rmd","02-literature.Rmd","03-dplyr.Rmd","04-mapas.Rmd","05-summary.Rmd","06-references.Rmd"]
+delete_merged_file: false
 language:
+  language:
+  label:
+    fig: 'Figura '
+    tab: 'Tabela '
+    eq: 'Equação '
+    thm: 'Teorema '
+    lem: 'Lema '
+    cor: 'Corolario '
+    prp: 'Proposição '
+    cnj: 'Conjecture '
+    def: 'Definição '
+    exm: 'Exemplo '
+    exr: 'Exercício '
+    hyp: 'Hypothesis '
+    proof: 'Prova. '
+    remark: 'Observação. '
+    solution: 'Solução. '
   ui:
-    chapter_name: "Chapter "
-delete_merged_file: true
+    #chapter_name: "Capítulo "
+    appendix_name: "Apêndice "
+
+
+# https://stackoverflow.com/questions/65031625/how-to-use-datacamps-tutorial-package-to-insert-r-exercises-in-xaringan-slides
