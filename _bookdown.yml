@@ -1,6 +1,6 @@
 book_filename: "Rbookv1"
-rmd_files: ["03-dplyr.Rmd","04-mapas.Rmd"] 
-#rmd_files: ["index.Rmd","01-intro.Rmd","02-literature.Rmd","03-dplyr.Rmd","04-mapas.Rmd","05-summary.Rmd","06-references.Rmd"]
+#rmd_files: ["03-dplyr.Rmd","04-mapas.Rmd"] 
+rmd_files: ["index.Rmd","01-intro.Rmd","02-literature.Rmd","03-dplyr.Rmd","04-mapas.Rmd","05-summary.Rmd","06-references.Rmd"]
 delete_merged_file: false
 language:
   language:
